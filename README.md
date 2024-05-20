@@ -2,6 +2,31 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # BLE Devices Scanner App
 
+# Integrating BLE Device Scanner into a React Native Application
+
+How to integrate Bluetooth Low Energy (BLE) device scanning into your React Native application using the `react-native-ble-plx` library.
+
+## Installation
+
+Before we begin, ensure you have React Native set up in your project. Then, install `react-native-ble-plx`:
+
+```bash
+npm install @react-native-community/ble-plx
+```
+
+or using Yarn: `yarn add @react-native-community/ble-plx`
+
+# Considerations
+
+Handle Permissions:
+Make sure your application has the necessary permissions to access Bluetooth on both Android and iOS devices.
+
+Stop Device Scan (Optional):
+Remember to stop scanning when it's no longer necessary to conserve battery life.
+
+Error Handling: 
+Implement proper error handling to handle any errors that may occur during scanning.
+
 ## Scan devices
 
 Main screen
