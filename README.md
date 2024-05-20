@@ -27,6 +27,13 @@ Remember to stop scanning when it's no longer necessary to conserve battery life
 Error Handling: 
 Implement proper error handling to handle any errors that may occur during scanning.
 
+## How to Use
+
+1. Run app, press "Scan Devices", it will show Modal of nearby BLE devices list
+2. Now it is scanning nearby bluetooth devices and showing notification while scanning
+3. Select BLE device you want to connect
+4. It will go back to main screen and display selected BLE device data like Device ID, UUID, RSSI, etc.
+
 ## Scan devices
 
 Main screen
