@@ -47,6 +47,9 @@ const BLEScreen = () => {
 
   const notificationId: string = 'NotificationId';
 
+  /**
+   * Display notification when scan starts (and close it after select the device)
+   */
   async function onDisplayNotification() {
     // Request permissions (required for iOS)
     await notifee.requestPermission();

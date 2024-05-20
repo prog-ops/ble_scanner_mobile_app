@@ -89,6 +89,9 @@ function useCustomHook(): BluetoothLowEnergyApi {
     });
   };
 
+  /**
+   * Connect to device, stream the data and cancel notification after select the device
+   */
   const connectToDevice = async (device: Device) => {
     try {
       const deviceConnection = await bleManager.connectToDevice(device.id);
@@ -113,28 +116,29 @@ function useCustomHook(): BluetoothLowEnergyApi {
     }
   };
 
+  /**
+   * Stream the Characteristic to get things such as UUID, deviceID
+   */
   const startStreamingData = async (device: Device) => {
     if (device) {
       let serviceUUID: string = '';
-      let characteristicUuid: string = '';
-      device.serviceUUIDs?.forEach(UUID => {
-        serviceUUID = UUID;
-      });
+      let uuid: string = '';
 
-      if (Platform.OS === 'ios') {
-        device.overflowServiceUUIDs?.forEach(UUID => {
-          characteristicUuid = UUID;
-        });
-      } else {
-        device.solicitedServiceUUIDs?.forEach(UUID => {
-          characteristicUuid = UUID;
-        });
-      }
+      device.services().then(services =>
+        services.map(service => {
+          service.characteristics().then(chars => {
+            chars.map(item => {
+              serviceUUID = item.serviceUUID;
+              uuid = item.uuid;
+            });
+          });
+        }),
+      );
 
       device.monitorCharacteristicForService(
         serviceUUID,
-        characteristicUuid,
-        (error, characteristic) => onHeartRateUpdate(error, characteristic),
+        uuid,
+        (error, characteristic) => onDeviceUpdate(error, characteristic),
         '',
       );
     } else {
@@ -142,12 +146,16 @@ function useCustomHook(): BluetoothLowEnergyApi {
     }
   };
 
-  const onHeartRateUpdate = (
+  /**
+   * Display additional information about the device after selected
+   * e.g. BleError, Characteristic
+   */
+  const onDeviceUpdate = (
     bleError: BleError | null,
     characteristic: Characteristic | null,
   ) => {
     if (bleError) {
-      console.log(bleError);
+      // console.log(bleError);
       setBleError(bleError);
       return -1;
     } else if (!characteristic?.value) {
@@ -175,9 +183,9 @@ function useCustomHook(): BluetoothLowEnergyApi {
     ]);
   };
 
-  const onBleError = (): BleError | undefined => {
-    return bleError;
-  };
+  // const onBleError = (): BleError | undefined => {
+  //   return bleError;
+  // };
 
   return {
     scanForPeripherals,
