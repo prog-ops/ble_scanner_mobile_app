@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {
+  ImageBackground,
+  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
+  View
+} from "react-native";
 import notifee from '@notifee/react-native';
 import useCustomHook from './hooks/useCustomHook';
 import {MyText} from './components/MyText';
@@ -77,7 +79,10 @@ const BLEScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.titleWrapper}>
+      <ImageBackground
+        source={require('./../assets/images/background.jpg')}
+        blurRadius={Platform.OS === 'ios' ? 10 : 0} // Apply blur only on iOS
+        style={styles.titleWrapper}>
         {connectedDevice ? (
           <>
             <Text style={styles.titleText}>BLE Peripheral Data:</Text>
@@ -116,7 +121,7 @@ const BLEScreen = () => {
           style={[styles.text, {color: 'orange'}]}
           children={connectedDevice ? bleError?.message : ''}
         />
-      </View>
+      </ImageBackground>
       <TouchableOpacity
         onPress={connectedDevice ? disconnectFromDevice : openModal}
         style={connectedDevice ? styles.ctaButtonDisconnect : styles.ctaButton}>
