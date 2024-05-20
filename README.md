@@ -27,6 +27,8 @@ Remember to stop scanning when it's no longer necessary to conserve battery life
 Error Handling: 
 Implement proper error handling to handle any errors that may occur during scanning.
 
+RSSI (signal strength): Sometimes signal strength is hard to detect due to many factors such as device conditions, therefore it shows unknown signal strength instead.
+
 ## How to Use
 
 1. Run app, press "Scan Devices", it will show Modal of nearby BLE devices list
