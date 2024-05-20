@@ -16,6 +16,7 @@
     "react-native-ble-plx": "^3.0.0",
     "react-native-device-info": "^10.2.0",
     "react-native-gesture-handler": "^2.14.0",
+    "react-native-orientation-locker": "^1.7.0",
     "react-native-permissions": "^3.6.1",
     "react-native-quick-base64": "^2.0.5",
     "react-native-vector-icons": "^10.0.3"

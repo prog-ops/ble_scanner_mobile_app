@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   Platform,
@@ -12,6 +12,7 @@ import notifee from '@notifee/react-native';
 import useCustomHook from './hooks/useCustomHook';
 import {MyText} from './components/MyText';
 import PeripheralModal from './components/CustomModal';
+import Orientation from "react-native-orientation-locker";
 
 const BLEScreen = () => {
   const {
@@ -79,6 +80,15 @@ const BLEScreen = () => {
   async function cancel() {
     await notifee.cancelAllNotifications();
   }
+
+  useEffect(() => {
+    // lock the screen orientation to portrait
+    Orientation.lockToPortrait();
+    // unlock orientation when the component unmounts
+    return () => {
+      Orientation.unlockAllOrientations();
+    };
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
